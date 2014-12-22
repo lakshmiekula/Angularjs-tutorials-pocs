@@ -1,0 +1,15 @@
+
+table {
+	border-spacing: 0px;
+	border: 1px solid silver;
+	margin-top: 10px;
+	width: 500px;
+}
+
+tr th {
+	color: red;
+}
+
+tr td {
+	text-align: center;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo">
+
+<head>
+    <title>crud operations sample </title>
+    <link rel="stylesheet" type="text/css" href="css/employeeController.css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="details" ng-controller="ModalDemoCtrl">
+        <div>Enter name to find details:
+            <input type="search" ng-model="searchParam" placeholder="enter employee name..." />
+        </div>
+        <table border="1">
+            <tr>
+                <th>Id </th>
+                <th>Employee name</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr ng-repeat="name in names | filter : {name:searchParam}">
+                <td>{{name.id}}</td>
+                <td>{{name.name}}</td>
+                <td>{{name.position}}</td>
+                <td>
+                    <a href="#" ng-click="editRecord($index)">edit</a> |
+                    <a href="#" class="delete" title="delete row" ng-click="deleteRecord($index)">(x)</a>
+                </td>
+            </tr>
+
+        </table>
+
+        <p>Employee name:
+            <br>
+            <input type="text" name="name" ng-model="newEmployee.name" required>
+        </p>
+
+        <p>Position
+            <br>
+            <input type="text" name="position" ng-model="newEmployee.position" required>
+        </p>
+
+        <p>
+            <input type="hidden" ng-model="newEmployee.id" />
+            <button ng-click="addRecord()">{{buttonText}}</button>
+        </p>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title">I'm a modal!</h3>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li ng-repeat="item in items">
+                        <a ng-click="selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+        <button class="btn btn-default" ng-click="open()">Open me!</button>
+		
+		 <form name="myForm" novalidate class="form-horizontal">
+    
+		  <div class="control-group" >
+			<label>Name:</label>
+			<input type="text" name="name" placeholder="Name" ng-model="user.name" ng-minlength="2" ng-maxlength="12" required/>
+			<span ng-show="isInvalid('name') || validationFlag" class="help-inline" style="color:red;">Name is required</span>
+			<span ng-show="isValid('name')" style="color:green;">Great!</span>
+		  </div>
+		  <button ng-click="submitTheForm()">Submit Form</button>
+		</form>
+    </div>
+    <!--script files goes here -->
+    <script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script type="text/javascript" src="js/detailsController/employeeController.js"></script>
+</body>
+
+</html>
